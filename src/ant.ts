@@ -1,5 +1,6 @@
 
-import { Coordinate, SpaceConfig } from "./space"
+import { Coordinate, logCoord, SpaceConfig } from "./space"
+import { normalize } from "./utilities"
 
 export interface Orientation {
     facingDir: AbsoluteDirection,
@@ -52,30 +53,22 @@ const isLateralChange = (change: DirectionalChange): Boolean => {
     return [DirectionalChange.TurnLeft, DirectionalChange.TurnRight].includes(change)
 }
 
-const normalize = (val: number, max: number) => {
-    if (val >= max) {
-        return val - max
-    } else if (val < 0) {
-        return val + max
-    } else {
-        return val
-    }
-}
-
-const moveAnt = (ant: Ant, config: SpaceConfig): Coordinate => {
+export const moveAnt = (ant: Ant, config: SpaceConfig): Coordinate => {
+    let newCoord: Coordinate
     if (ant.orientation.facingDir == AbsoluteDirection.Left) {
-        return { x: normalize(ant.coord.x - 1, config.numX), ...ant.coord }
+        newCoord = { ...ant.coord, x: normalize(ant.coord.x - 1, config.numX) }
     } else if (ant.orientation.facingDir == AbsoluteDirection.Right) {
-        return { x: normalize(ant.coord.x + 1, config.numX), ...ant.coord }
+        newCoord = { ...ant.coord, x: normalize(ant.coord.x + 1, config.numX) }
     } else if (ant.orientation.facingDir == AbsoluteDirection.Up) {
-        return { x: normalize(ant.coord.y - 1, config.numY), ...ant.coord }
+        newCoord = { ...ant.coord, y: normalize(ant.coord.y - 1, config.numY) }
     } else if (ant.orientation.facingDir == AbsoluteDirection.Down) {
-        return { x: normalize(ant.coord.y + 1, config.numY), ...ant.coord }
+        newCoord = { ...ant.coord, y: normalize(ant.coord.y + 1, config.numY) }
     } else if (ant.orientation.facingDir == AbsoluteDirection.Back) {
-        return { x: normalize(ant.coord.x + 1, config.numZ), ...ant.coord }
+        newCoord = {  ...ant.coord, z: normalize(ant.coord.z + 1, config.numZ)}
     } else if (ant.orientation.facingDir == AbsoluteDirection.Front) {
-        return { x: normalize(ant.coord.x - 1, config.numZ), ...ant.coord }
+        newCoord = {...ant.coord, z: normalize(ant.coord.z - 1, config.numZ), }
     }
+    return newCoord
 }
 
 
@@ -93,23 +86,20 @@ const lateralRotation = (orientation: Orientation, changeDir: DirectionalChange)
     let seq: RotationalCycle
     if ([AbsoluteDirection.Up, AbsoluteDirection.Down].includes(orientation.topDir)) {
         seq = xzCycle
-        console.log(`seq xz`);
         
     } else if ([AbsoluteDirection.Back, AbsoluteDirection.Front].includes(orientation.topDir)) {
         seq = xyCycle
-              console.log(`seq yz`);
     } else {
         seq = yzCycle
-              console.log(`seq yz`);
     }
 
     const startIndex = seq.indexOf(orientation.facingDir)
     const rawDestinationIndex = startIndex + (changeDir == DirectionalChange.TurnLeft ? -1 : 1)
-     console.log(`raw after tuen index: ${rawDestinationIndex}`);
+    //  console.log(`raw after tuen index: ${rawDestinationIndex}`);
     const normalizedDestinationIndex = normalize(rawDestinationIndex, 4)
-       console.log(`normal after tuen index: ${normalizedDestinationIndex}`);
+    //    console.log(`normal after tuen index: ${normalizedDestinationIndex}`);
     const newFacingDir = seq[normalizedDestinationIndex]
-     console.log(`newdis: ${newFacingDir}`);
+    //  console.log(`newdis: ${newFacingDir}`);
     return {topDir: orientation.topDir, facingDir: newFacingDir}
 }
 
