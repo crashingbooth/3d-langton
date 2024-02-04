@@ -1,4 +1,5 @@
 
+import { SoundPlayer } from "./sound"
 import { Coordinate, logCoord, SpaceConfig } from "./space"
 import { normalize } from "./utilities"
 
@@ -10,6 +11,8 @@ export interface Orientation {
 export interface Ant {
     coord: Coordinate,
     orientation: Orientation
+    statePlayer: SoundPlayer
+    facingDirPlayer: SoundPlayer
 }
 
 export enum AbsoluteDirection {
