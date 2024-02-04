@@ -99,7 +99,9 @@ const lateralRotation = (orientation: Orientation, changeDir: DirectionalChange)
     }
 
     const startIndex = seq.indexOf(orientation.facingDir)
-    const rawDestinationIndex = startIndex + (changeDir == DirectionalChange.TurnLeft ? -1 : 1)
+    const basicDirectionalChange = changeDir == DirectionalChange.TurnLeft ? -1 : 1
+    const modifiedDirectionalChange = [AbsoluteDirection.Up, AbsoluteDirection.Right, AbsoluteDirection.Back].includes(orientation.topDir) ? 1 : -1
+    const rawDestinationIndex = startIndex + (basicDirectionalChange * modifiedDirectionalChange)
     //  console.log(`raw after tuen index: ${rawDestinationIndex}`);
     const normalizedDestinationIndex = normalize(rawDestinationIndex, 4)
     //    console.log(`normal after tuen index: ${normalizedDestinationIndex}`);

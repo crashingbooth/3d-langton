@@ -57,6 +57,7 @@ export const setState = (space: Space, coord: Coordinate, state: State): Space =
     space[coord.z][coord.y][coord.x] = state
     return space
 }
+
 const colours = col4
 export const drawSpace = (p5: p5, space: Space, config: SpaceConfig) => {
     space.forEach((layer, layerNum) => {
@@ -106,13 +107,21 @@ export const sampleSpace = () => {
 }
 
 export const autorotation = (p: p5, frame: number, factor: number) => {
-    p.rotateY(p.radians((frame/10) / factor))
-    p.rotateZ(p.radians((frame/5) / factor))
-    p.rotateX(p.radians((frame/7) / factor))
+    p.rotateY(p.radians((frame / 10) / factor))
+    p.rotateZ(p.radians((frame / 5) / factor))
+    p.rotateX(p.radians((frame / 7) / factor))
 }
 
 export const mouseRotation = (p: p5) => {
-    p.rotateX(p.radians(p.mouseY/3))
-    p.rotateZ(p.radians(p.mouseX/3))
+    p.rotateX(p.radians(p.mouseY / 3))
+    p.rotateZ(p.radians(p.mouseX / 3))
+}
+
+export const offsetAxes = (p: p5, config: SpaceConfig) => {
+    p.translate(
+        (config.numX * config.unit) / -2,
+       0,// (config.numY * config.unit) / -2,
+        (config.numX * config.unit) / -2
+    )
 }
 

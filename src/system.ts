@@ -58,20 +58,20 @@ const makeCentralAnt = (config: SpaceConfig): Ant => {
 
 const makePairlAnt = (config: SpaceConfig): Ant[] => {
     const ant1: Ant =  {
-        coord: {x: Math.floor(config.numX / 3), y: Math.floor(config.numY / 3), z: Math.floor(config.numZ/ 3)}, 
+        coord: {x: Math.floor(2 * config.numX / 4) , y: Math.floor(2* config.numY / 4)+1, z: Math.floor(2* config.numZ/ 4)},  
         orientation: {topDir: AbsoluteDirection.Up, facingDir: AbsoluteDirection.Front},
         statePlayer: sp1(1),
         facingDirPlayer: sp2(2)
     }
 
     const ant2: Ant = {
-        coord: {x: Math.floor(2 * config.numX / 3) + 2, y: Math.floor(2 * config.numY / 3), z: Math.floor(2 * config.numZ/ 3)}, 
-        orientation: {topDir: AbsoluteDirection.Left, facingDir: AbsoluteDirection.Down},
+        coord: {x: Math.floor(2 * config.numX / 4)-6, y: Math.floor(2* config.numY / 4)-4, z: Math.floor(3 * config.numZ/ 4)}, 
+        orientation: {topDir: AbsoluteDirection.Up, facingDir: AbsoluteDirection.Right},
         statePlayer: sp1(3),
         facingDirPlayer: sp2(4)
     }
     
-    return [ant1,ant2]
+    return [ant1, ant2]
 } 
 
 // angled highway
@@ -106,12 +106,12 @@ const makePairlAnt = (config: SpaceConfig): Ant[] => {
 //     rule: [ DirectionalChange.PitchDown, DirectionalChange.TurnRight, DirectionalChange.PitchDown, DirectionalChange.TurnLeft,  ]
 // }
 
-export const tempDefaultSystem: System = {
-    space: makeEmptySpace(defaultConfig),
-    spaceConfig: defaultConfig,
-    ants: makePairlAnt(defaultConfig),
-    rule: [ DirectionalChange.PitchDown, DirectionalChange.TurnRight, DirectionalChange.PitchDown, DirectionalChange.TurnLeft ]
-}
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants: makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchDown, DirectionalChange.TurnRight, DirectionalChange.PitchDown, DirectionalChange.TurnLeft ]
+// }
 
 // good, keeps making perpendicular towers, keeps reforming highway
 // export const tempDefaultSystem: System = {
@@ -143,3 +143,31 @@ export const tempDefaultSystem: System = {
 //     ants: [makeCentralAnt(defaultConfig)],
 //     rule: [ DirectionalChange.PitchDown,  DirectionalChange.TurnLeft, DirectionalChange.TurnRight, DirectionalChange.PitchUp  ]
 // }
+
+
+// AFTER FIX
+
+// patterny but no obvious HW
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants: makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchDown, DirectionalChange.PitchDown, DirectionalChange.PitchUp, DirectionalChange.PitchDown,DirectionalChange.TurnRight, DirectionalChange.TurnLeft,DirectionalChange.TurnRight   ]
+// }
+
+
+// finally! longish twisting hW
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants: makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchDown, DirectionalChange.PitchUp, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.PitchDown, DirectionalChange.PitchUp, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft  ]
+// }
+
+
+export const tempDefaultSystem: System = {
+    space: makeEmptySpace(defaultConfig),
+    spaceConfig: defaultConfig,
+    ants: makePairlAnt(defaultConfig),
+    rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None, DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None ]
+}

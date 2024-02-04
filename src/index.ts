@@ -1,6 +1,6 @@
 import * as p5 from 'p5';
 import { articulate, sp1, webMidiInit } from './sound';
-import { autorotation, drawFromMetadata, drawSpace, logCoord, mouseRotation } from './space';
+import { autorotation, drawFromMetadata, drawSpace, logCoord, mouseRotation, offsetAxes } from './space';
 import { applyRule, System, tempDefaultSystem } from './system';
 
 let system: System
@@ -14,11 +14,14 @@ export const sketch = (p: p5) => {
     }
 
     p.draw = () => {
+        mouseRotation(p)
+           autorotation(p, frame, 2)
+        offsetAxes(p, system.spaceConfig)
         p.background(0);
         p.frameRate(15)
         frame++
-        mouseRotation(p)
-        autorotation(p, frame, 2)
+   
+
         drawSpace(p, system.space, system.spaceConfig)
         if (frame % 2 === 0 ) {
         system = applyRule(system)
