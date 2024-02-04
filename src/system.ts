@@ -48,5 +48,5 @@ export const tempDefaultSystem: System = {
     space: makeEmptySpace(defaultConfig),
     spaceConfig: defaultConfig,
     ants: [makeCentralAnt(defaultConfig)],
-    rule: [DirectionalChange.TurnLeft, DirectionalChange.PitchUp,  DirectionalChange.TurnRight]
+    rule: [DirectionalChange.TurnLeft, DirectionalChange.PitchUp, DirectionalChange.TurnRight, DirectionalChange.PitchDown]
 }
