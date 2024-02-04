@@ -46,7 +46,9 @@ export enum DirectionalChange {
     TurnLeft,
     TurnRight,
     PitchUp,
-    PitchDown
+    PitchDown, 
+    None, 
+    Reverse
 }
 
 const isLateralChange = (change: DirectionalChange): Boolean => {
@@ -114,7 +116,11 @@ export const turnAnt = (startingOrientation: Orientation, changeDir: Directional
         } else if (changeDir == DirectionalChange.PitchDown) {
             // facing -> top, opposite(top) -> facing
             return { topDir: startingOrientation.facingDir, facingDir: oppositeDir(startingOrientation.topDir) }
-        }
+        } else if (changeDir == DirectionalChange.None) {
+            return startingOrientation
+        } else if (changeDir == DirectionalChange.Reverse) {
+            return { topDir: startingOrientation.topDir, facingDir: oppositeDir(startingOrientation.facingDir) }
+        } 
     }
 }
 

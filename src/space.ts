@@ -1,5 +1,6 @@
 import * as p5 from 'p5';
 import { blueOrangeBrown } from './color';
+import { System } from './system';
 
 export interface Coordinate {
     x: number,
@@ -68,15 +69,14 @@ export const drawSpace = (p5: p5, space: Space, config: SpaceConfig) => {
                 p5.push()
                 p5.translate(config.unit * colNum, 0, 0)
                 const state = getState(space, { x: colNum, y: rowNum, z: layerNum })
-                p5.stroke(50)
+                p5.stroke(80)
+                p5.strokeWeight(0.5)
 
                 if (state !== 0) {
-                    p5.fill(colours[state])
+                    p5.fill(colours[state % colours.length])
                     p5.box(config.unit * 0.7)
-                    //  p5.sphere(config.unit/2, 30, 30)
+                    //  p5.sphere(config.unit/2, 4,3)
                 }
-               
-               
                 p5.pop()
             })
             p5.pop()
@@ -85,9 +85,33 @@ export const drawSpace = (p5: p5, space: Space, config: SpaceConfig) => {
     p5.pop()
 }
 
+export const drawFromMetadata = (p5: p5, system: System) => {
+    if (!system.turnMetadata) { return }
+    const unit = system.spaceConfig.unit
+    system.turnMetadata.modifiedCoords.forEach((coord) => {
+        const newState = getState(system.space, coord)
+        p5.push()
+        p5.translate(unit * coord.x, unit * coord.y, unit * coord.z)
+        p5.fill(colours[newState])
+        p5.box(unit * 0.7)
+        p5.pop()
+    })
+}
+
 export const sampleSpace = () => {
     let s = makeEmptySpace(defaultConfig)
     return setState(s, coord(1, 1, 1), 1)
     // return s
+}
+
+export const autorotation = (p: p5, frame: number, factor: number) => {
+    p.rotateY(p.radians((frame/10) / factor))
+    p.rotateZ(p.radians((frame/5) / factor))
+    p.rotateX(p.radians((frame/7) / factor))
+}
+
+export const mouseRotation = (p: p5) => {
+    p.rotateX(p.radians(p.mouseY/3))
+    p.rotateZ(p.radians(p.mouseX/3))
 }
 
