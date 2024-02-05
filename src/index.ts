@@ -5,9 +5,10 @@ import { applyRule, System, tempDefaultSystem } from './system';
 
 let system: System
 let frame = 0
+let screenUnit = 145
 export const sketch = (p: p5) => {
     p.setup = () => {
-        p.createCanvas(1600, 1200, p.WEBGL);
+        p.createCanvas(16 * screenUnit, 9 * screenUnit, p.WEBGL);
         system = tempDefaultSystem
         // console.log(`SETUP: ${system.ants[0].facingDirPlayer}`);
         webMidiInit()
@@ -17,8 +18,8 @@ export const sketch = (p: p5) => {
         mouseRotation(p)
            autorotation(p, frame, 2)
         offsetAxes(p, system.spaceConfig)
-        p.background(0);
-        p.frameRate(15)
+        p.background(30);
+        p.frameRate(14.5)
         frame++
    
 

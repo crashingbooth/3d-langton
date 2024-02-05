@@ -57,18 +57,21 @@ const makeCentralAnt = (config: SpaceConfig): Ant => {
 } 
 
 const makePairlAnt = (config: SpaceConfig): Ant[] => {
+    const yOffset = -5
+    const xOffset = 0
+    const zOffset = 0
     const ant1: Ant =  {
-        coord: {x: Math.floor(2 * config.numX / 4) , y: Math.floor(2* config.numY / 4)+1, z: Math.floor(2* config.numZ/ 4)},  
+        coord: {x: Math.floor(2 * config.numX / 4) -xOffset , y: Math.floor(2* config.numY / 4)+1 - yOffset, z: Math.floor(2* config.numZ/ 4) - zOffset},  
         orientation: {topDir: AbsoluteDirection.Up, facingDir: AbsoluteDirection.Front},
-        statePlayer: sp1(1),
-        facingDirPlayer: sp2(2)
+        statePlayer: sp1(3),
+        facingDirPlayer: sp2(4)
     }
 
     const ant2: Ant = {
-        coord: {x: Math.floor(2 * config.numX / 4)-6, y: Math.floor(2* config.numY / 4)-4, z: Math.floor(3 * config.numZ/ 4)}, 
+        coord: {x: Math.floor(2 * config.numX / 4)-6-xOffset, y: Math.floor(2* config.numY / 4)-4 - yOffset, z: Math.floor(3 * config.numZ/ 4) - zOffset}, 
         orientation: {topDir: AbsoluteDirection.Up, facingDir: AbsoluteDirection.Right},
-        statePlayer: sp1(3),
-        facingDirPlayer: sp2(4)
+        statePlayer: sp1(1),
+        facingDirPlayer: sp2(2)
     }
     
     return [ant1, ant2]

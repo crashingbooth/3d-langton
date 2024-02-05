@@ -104,7 +104,7 @@ export const sp1 = (channel: number)  => {
     return {
     channel: channel,
     // mapping: [0,10,3,5,-2,14,15,17],
-    mapping: [0,3,7,10,14,15,19],
+    mapping: [0,10,6,7,4,9], //0,3,7,10,14,15,19 ok
     ignoreZero: true,
     rearticulateOnRepeat: false,
     rootNote: 48,
