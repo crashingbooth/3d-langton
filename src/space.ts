@@ -117,6 +117,12 @@ export const mouseRotation = (p: p5) => {
     p.rotateZ(p.radians(p.mouseX / 3))
 }
 
+export const keyRotation = (p:p5, rotX: number, rotY: number, rotZ: number) => {
+    p.rotateX(p.radians(rotX))
+    p.rotateY(p.radians(rotY))
+    p.rotateZ(p.radians(rotZ))
+}
+
 export const offsetAxes = (p: p5, config: SpaceConfig) => {
     p.translate(
         (config.numX * config.unit) / -2,
