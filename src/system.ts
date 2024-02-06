@@ -168,9 +168,98 @@ const makePairlAnt = (config: SpaceConfig): Ant[] => {
 // }
 
 
+// THIS:
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants: makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None, DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None ]
+// }
+
+// forms highway, but becomes 2d
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants:[ makeCentralAnt(defaultConfig)],//makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft,DirectionalChange.PitchDown ]
+// }
+
+// good candidate
+// forms highway, becomes perpendicular at meeting, then perpendicular again
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants:[ makeCentralAnt(defaultConfig)],//makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchUp, DirectionalChange.PitchDown,DirectionalChange.TurnLeft ]
+// }
+
+
+// good candidate
+// makes complex twisting hW, might need a larger area, has a width of 8, maybe 2 perpendicular?
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants:[ makeCentralAnt(defaultConfig)],//makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchDown, DirectionalChange.PitchUp, DirectionalChange.PitchDown,DirectionalChange.TurnRight ]
+// }
+
+
+// v similar to DUDR
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants:[ makeCentralAnt(defaultConfig)],//makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.PitchUp,DirectionalChange.TurnRight, DirectionalChange.PitchUp ]
+// }
+
+// more of the same
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants:[ makeCentralAnt(defaultConfig)],//makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.PitchUp,DirectionalChange.TurnRight, DirectionalChange.PitchDown, DirectionalChange.TurnLeft ]
+// }
+
+
+// good candiadate
+// instant diagonal hW, then perpendicular diagonl at collision
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants:[ makeCentralAnt(defaultConfig)],//makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchUp, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.PitchDown]
+// }
+
+// GOOD!!, forms simple HW, patterns over itself, makes a nice X, maybe good with  a collsion
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants: makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft ]
+// }
+
+// neat HW, but doesn't repattern
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants: makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.None, DirectionalChange.PitchDown, DirectionalChange.TurnLeft ]
+// }
+
+
+// similar to RDLRDL - resilient
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants: makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnRight ]
+// }
+
 export const tempDefaultSystem: System = {
     space: makeEmptySpace(defaultConfig),
     spaceConfig: defaultConfig,
     ants: makePairlAnt(defaultConfig),
-    rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None, DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None ]
+    rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchUp, DirectionalChange.TurnRight ]
 }
+
+

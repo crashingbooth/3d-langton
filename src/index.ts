@@ -13,13 +13,11 @@ export const sketch = (p: p5) => {
     p.setup = () => {
         p.createCanvas(16 * screenUnit, 9 * screenUnit, p.WEBGL);
         system = tempDefaultSystem
-        // console.log(`SETUP: ${system.ants[0].facingDirPlayer}`);
         webMidiInit()
     }
 
     p.draw = () => {
         mouseRotation(p)
-        keyRotation(p, rotX, rotY, rotZ)
         // autorotation(p, frame, 2)
         offsetAxes(p, system.spaceConfig)
         p.background(30);
@@ -32,20 +30,7 @@ export const sketch = (p: p5) => {
             system = applyRule(system)
             articulate(system)
         }
-        // console.log(`top: ${system.ants[0].orientation.topDir}, face: ${ system.ants[0].orientation.facingDir}, coord: ${logCoord(system.ants[0].coord)} `);
     }
-
-    p.keyPressed = () => {
-        if (p.keyCode === p.LEFT_ARROW) {
-          rotX -= 1
-        } else if (p.keyCode === p.RIGHT_ARROW) {
-            rotX += 1
-        } else if (p.keyCode === p.UP_ARROW) {
-            rotY += 1
-        } else if (p.keyCode === p.DOWN_ARROW) {
-            rotY -= 1
-        }
-      }
 
 }
 
