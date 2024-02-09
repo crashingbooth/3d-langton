@@ -100,6 +100,30 @@ export const bpmToFrameRate = (bpm: number): number => {
 //     } 
 // }
 
+export const sp3 = (channel: number)  => {
+    return {
+    channel: channel,
+
+    mapping: [0,11,7,4,14], 
+    ignoreZero: true,
+    rearticulateOnRepeat: false,
+    rootNote: 48,
+    duration: 125,
+    debugToConsole: false
+}
+}
+
+export const sp4 = (channel: number) => {
+    return {
+    channel: channel,
+    mapping: [0,1,2,3,4,5,6,7,8,9,10,11,12],
+    ignoreZero: false,
+    rearticulateOnRepeat: false,
+    rootNote: 60,
+    duration: 100,
+    debugToConsole: false
+}}
+
 export const sp1 = (channel: number)  => {
     return {
     channel: channel,

@@ -66,7 +66,7 @@ export const blueOrangeBrown: ColorScheme = [         // white
     "#5C5E58",           // a3
     "#631807",           // b3
     "#E5E2E2"
-].map( e => hexToRGB(e))
+].map(e => hexToRGB(e))
 
 export const col3 = ["#5B5393",           // c1
     "#7CBB92",           // d1
@@ -78,7 +78,7 @@ export const col3 = ["#5B5393",           // c1
     "#297C46",           // a1
     "#90305A",  // d2
     "#201858",           // a3
-    "#105D2A"].map( e => hexToRGB(e))         // b3
+    "#105D2A"].map(e => hexToRGB(e))         // b3
 
 export const col4 = [
     "#713E5A",           // a1
@@ -91,7 +91,7 @@ export const col4 = [
     "#F7E5CD",           // d2
     "#E1A193",           // a3
     "#D993A7",           // b3
-    "#75634B"].map( e => hexToRGB(e))        // c3
+    "#75634B"].map(e => hexToRGB(e))        // c3
 
 export const whiteAndOther: ColorScheme = [
     [255, 255, 255],
@@ -106,4 +106,19 @@ export const blackAndWhite = (numStates: number): ColorScheme => {
         const val = Math.floor(index * interval)
         return [val, val, val]
     })
-} 
+}
+
+
+export const scheme3: ColorScheme = [
+    { "name": "Dark purple",
+     "hex": "231c35", 
+     "rgb": [35, 28, 53],
+      "cmyk": [34, 47, 0, 79],
+       "hsb": [257, 47, 21], 
+       "hsl": [257, 31, 16],
+        "lab": [12, 10, -15] }, 
+        { "name": "Dark purple", "hex": "242039", "rgb": [36, 32, 57], "cmyk": [37, 44, 0, 78], "hsb": [250, 44, 22], "hsl": [250, 28, 17], "lab": [14, 9, -16] }, { "name": "Space cadet", "hex": "2a2b47", "rgb": [42, 43, 71], "cmyk": [41, 39, 0, 72], "hsb": [238, 41, 28], "hsl": [238, 26, 22], "lab": [19, 8, -18] }, { "name": "English Violet", "hex": "484564", "rgb": [72, 69, 100], "cmyk": [28, 31, 0, 61], "hsb": [246, 31, 39], "hsl": [246, 18, 33], "lab": [31, 9, -18] }, { "name": "English Violet", "hex": "5b5271", "rgb": [91, 82, 113], "cmyk": [19, 27, 0, 56], "hsb": [257, 27, 44], "hsl": [257, 16, 38], "lab": [37, 11, -16] }, { "name": "Chinese Violet", "hex": "6e5774", "rgb": [110, 87, 116], "cmyk": [5, 25, 0, 55], "hsb": [288, 25, 45], "hsl": [288, 14, 40], "lab": [40, 15, -13] }
+].map(e => {return e["rgb" ] as PColor})
+
+
+export const scheme4: ColorScheme = [{"name":"Reseda green","hex":"716d3c","rgb":[113,109,60],"cmyk":[0,4,47,56],"hsb":[55,47,44],"hsl":[55,31,34],"lab":[45,-6,28]},{"name":"Harvest gold","hex":"ce891e","rgb":[206,137,30],"cmyk":[0,33,85,19],"hsb":[36,85,81],"hsl":[36,75,46],"lab":[63,18,62]}, {"name":"Xanthous","hex":"e9b136","rgb":[233,177,54],"cmyk":[0,24,77,9],"hsb":[41,77,91],"hsl":[41,80,56],"lab":[75,9,67]},{"name":"Coffee","hex":"6d4f38","rgb":[109,79,56],"cmyk":[0,28,49,57],"hsb":[26,49,43],"hsl":[26,32,32],"lab":[36,9,19]},{"name":"Bistre","hex":"422716","rgb":[66,39,22],"cmyk":[0,41,67,74],"hsb":[23,67,26],"hsl":[23,50,17],"lab":[19,11,16]},{"name":"Olive","hex":"807f40","rgb":[128,127,64],"cmyk":[0,1,50,50],"hsb":[59,50,50],"hsl":[59,33,38],"lab":[52,-9,34]},].map(e => {return e["rgb" ] as PColor})

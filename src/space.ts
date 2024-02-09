@@ -1,5 +1,5 @@
 import * as p5 from 'p5';
-import { blueOrangeBrown, col3, col4, redToBrown } from './color';
+import { scheme4 } from './color';
 import { System } from './system';
 
 export interface Coordinate {
@@ -31,10 +31,10 @@ export interface SpaceConfig {
 }
 
 export const defaultConfig: SpaceConfig = {
-    numX: 25,
-    numY: 25,
-    numZ: 25,
-    unit: 22
+    numX: 20,
+    numY: 20,
+    numZ: 20,
+    unit: 30
 }
 
 const makeEmptyRow = (cols: number): number[] => {
@@ -58,8 +58,9 @@ export const setState = (space: Space, coord: Coordinate, state: State): Space =
     return space
 }
 
-const colours = blueOrangeBrown
+const colours = scheme4
 export const drawSpace = (p5: p5, space: Space, config: SpaceConfig) => {
+    p5.background(colours[0])
     space.forEach((layer, layerNum) => {
         p5.push()
         p5.translate(0, 0, config.unit)
@@ -70,8 +71,8 @@ export const drawSpace = (p5: p5, space: Space, config: SpaceConfig) => {
                 p5.push()
                 p5.translate(config.unit * colNum, 0, 0)
                 const state = getState(space, { x: colNum, y: rowNum, z: layerNum })
-                p5.stroke(75 )
-                p5.strokeWeight(3)
+                p5.stroke(colours[0] )
+                p5.strokeWeight(4)
                 // p5.noStroke()
 
                 if (state !== 0) {

@@ -1,7 +1,7 @@
 import { defaultConfig, getState, makeEmptySpace, setState, Space, SpaceConfig, Coordinate } from "./space";
 import { AbsoluteDirection, Ant, DirectionalChange, moveAnt, turnAnt } from "./ant";
 import { normalize } from "./utilities";
-import { sp1, sp2 } from "./sound";
+import { sp1, sp2, sp3 ,sp4} from "./sound";
 
 type Rule = DirectionalChange[]
 
@@ -49,29 +49,29 @@ const makeCentralAnt = (config: SpaceConfig): Ant => {
     const ant =  {
         coord: {x: Math.floor(config.numX / 2), y: Math.floor(config.numY / 2), z: Math.floor(config.numZ/ 2)}, 
         orientation: {topDir: AbsoluteDirection.Up, facingDir: AbsoluteDirection.Front},
-        statePlayer: sp1(1),
-        facingDirPlayer: sp2(2)
+        statePlayer: sp3(1),
+        facingDirPlayer: sp4(2)
     }
     
     return ant
 } 
 
 const makePairlAnt = (config: SpaceConfig): Ant[] => {
-    const yOffset = 3//0
-    const xOffset = 5//10
-    const zOffset = 0//4
+    const yOffset = -2//0
+    const xOffset = -6//10
+    const zOffset = -11//4
     const ant1: Ant =  {
-        coord: {x: Math.floor(2 * config.numX / 4) + xOffset , y: Math.floor(2* config.numY / 4) + 1 +  yOffset, z: Math.floor(2* config.numZ/ 4) +  zOffset},  
+        coord: {x: Math.floor(2 * config.numX / 4) + xOffset , y: Math.floor(2* config.numY / 4) -1 +  yOffset, z: Math.floor(2* config.numZ/ 4) +  zOffset},  
         orientation: {topDir: AbsoluteDirection.Up, facingDir: AbsoluteDirection.Front},
-        statePlayer: sp1(3),
-        facingDirPlayer: sp2(4)
+        statePlayer: sp3(1),
+        facingDirPlayer: sp4(2)
     }
 
     const ant2: Ant = {
-        coord: {x: Math.floor(2 * config.numX / 4)-6 + xOffset, y: Math.floor(2* config.numY / 4)-4 +  yOffset, z: Math.floor(3 * config.numZ/ 4) +  zOffset}, 
+        coord: {x: Math.floor(2 * config.numX / 4) + xOffset, y: Math.floor(2* config.numY / 4) +  yOffset, z: Math.floor(3 * config.numZ/ 4) +  zOffset}, 
         orientation: {topDir: AbsoluteDirection.Up, facingDir: AbsoluteDirection.Right},
-        statePlayer: sp1(1),
-        facingDirPlayer: sp2(2)
+        statePlayer: sp3(3),
+        facingDirPlayer: sp2(4)
     }
     
     return [ant1, ant2]
@@ -169,12 +169,12 @@ const makePairlAnt = (config: SpaceConfig): Ant[] => {
 
 
 // THIS:
-export const tempDefaultSystem: System = {
-    space: makeEmptySpace(defaultConfig),
-    spaceConfig: defaultConfig,
-    ants: makePairlAnt(defaultConfig),
-    rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None, DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None ]
-}
+// export const tempDefaultSystem: System = {
+//     space: makeEmptySpace(defaultConfig),
+//     spaceConfig: defaultConfig,
+//     ants: makePairlAnt(defaultConfig),
+//     rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None, DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None ]
+// }
 
 // forms highway, but becomes 2d
 // export const tempDefaultSystem: System = {
@@ -247,13 +247,13 @@ export const tempDefaultSystem: System = {
 // }
 
 
-// similar to RDLRDL - resilient
-// export const tempDefaultSystem: System = {
-//     space: makeEmptySpace(defaultConfig),
-//     spaceConfig: defaultConfig,
-//     ants: makePairlAnt(defaultConfig),
-//     rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnRight ]
-// }
+//similar to RDLRDL - resilient
+export const tempDefaultSystem: System = {
+    space: makeEmptySpace(defaultConfig),
+    spaceConfig: defaultConfig,
+    ants: makePairlAnt(defaultConfig),
+    rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnRight]
+}
 
 
 
