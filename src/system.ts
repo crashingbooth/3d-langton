@@ -169,12 +169,12 @@ const makePairlAnt = (config: SpaceConfig): Ant[] => {
 
 
 // THIS:
-// export const tempDefaultSystem: System = {
-//     space: makeEmptySpace(defaultConfig),
-//     spaceConfig: defaultConfig,
-//     ants: makePairlAnt(defaultConfig),
-//     rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None, DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None ]
-// }
+export const tempDefaultSystem: System = {
+    space: makeEmptySpace(defaultConfig),
+    spaceConfig: defaultConfig,
+    ants: makePairlAnt(defaultConfig),
+    rule: [ DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None, DirectionalChange.PitchUp, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.TurnLeft, DirectionalChange.None ]
+}
 
 // forms highway, but becomes 2d
 // export const tempDefaultSystem: System = {
@@ -255,11 +255,5 @@ const makePairlAnt = (config: SpaceConfig): Ant[] => {
 //     rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnRight ]
 // }
 
-export const tempDefaultSystem: System = {
-    space: makeEmptySpace(defaultConfig),
-    spaceConfig: defaultConfig,
-    ants: makePairlAnt(defaultConfig),
-    rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchUp, DirectionalChange.TurnRight ]
-}
 
 

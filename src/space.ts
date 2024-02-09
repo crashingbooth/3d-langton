@@ -113,8 +113,8 @@ export const autorotation = (p: p5, frame: number, factor: number) => {
 }
 
 export const mouseRotation = (p: p5) => {
-    p.rotateX(p.radians(p.mouseY / 3))
-    p.rotateZ(p.radians(p.mouseX / 3))
+    p.rotateX(p.radians(p.mouseY * 0.3 ))
+    p.rotateZ(p.radians(p.mouseX * 0.3))
 }
 
 export const keyRotation = (p:p5, rotX: number, rotY: number, rotZ: number) => {
