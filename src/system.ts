@@ -2,6 +2,7 @@ import { defaultConfig, getState, makeEmptySpace, setState, Space, SpaceConfig, 
 import { AbsoluteDirection, Ant, DirectionalChange, moveAnt, turnAnt } from "./ant";
 import { normalize } from "./utilities";
 import { sp1, sp2, sp3 ,sp4} from "./sound";
+import { ColorScheme, scheme4 } from "./color";
 
 type Rule = DirectionalChange[]
 
@@ -10,7 +11,8 @@ export interface System {
     spaceConfig: SpaceConfig
     ants: Ant[],
     rule: Rule,
-    turnMetadata?: TurnMetadata
+    turnMetadata?: TurnMetadata, 
+    colorScheme: ColorScheme
 }
 
 export interface TurnMetadata {
@@ -252,7 +254,8 @@ export const tempDefaultSystem: System = {
     space: makeEmptySpace(defaultConfig),
     spaceConfig: defaultConfig,
     ants: makePairlAnt(defaultConfig),
-    rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnRight]
+    rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnRight],
+    colorScheme: scheme4
 }
 
 
