@@ -4,11 +4,11 @@ import { autorotation, drawFromMetadata, drawSpace, mouseRotation, offsetAxes, k
 import { applyRule, System, tempDefaultSystem } from './system';
 
 let system: System
-let frame = 0//-850
+let frame = -700
 let screenUnit = 145
 let rotX = 0
 let rotY = 0
-let rotZ = 0
+let rotZ = 80
 export const sketch = (p: p5) => {
     p.setup = () => {
         p.createCanvas(16 * screenUnit, 9 * screenUnit, p.WEBGL);
@@ -19,14 +19,14 @@ export const sketch = (p: p5) => {
     p.draw = () => {
         frame++
         console.log(`frame:${frame}`)
-        if (frame < 0) { return }
         mouseRotation(p)
         autorotation(p, frame, 2)
         offsetAxes(p, system.spaceConfig)
         p.frameRate(bpmToFrameRate(220))
 
 
-        drawSpace(p, system.space, system.spaceConfig)
+        drawSpace(p, system.space, system.spaceConfig, frame)
+        if (frame < 0) { return }
         if (frame % 3 === 0) {
             system = applyRule(system)
             articulate(system)

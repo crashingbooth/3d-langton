@@ -58,7 +58,7 @@ const makeCentralAnt = (config: SpaceConfig): Ant => {
 
 const makePairlAnt = (config: SpaceConfig): Ant[] => {
     const yOffset = -2//0
-    const xOffset = -6//10
+    const xOffset = -8//10
     const zOffset = -11//4
     const ant1: Ant =  {
         coord: {x: Math.floor(2 * config.numX / 4) + xOffset , y: Math.floor(2* config.numY / 4) -1 +  yOffset, z: Math.floor(2* config.numZ/ 4) +  zOffset},  

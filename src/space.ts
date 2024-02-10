@@ -34,7 +34,7 @@ export const defaultConfig: SpaceConfig = {
     numX: 20,
     numY: 20,
     numZ: 20,
-    unit: 30
+    unit: 33
 }
 
 const makeEmptyRow = (cols: number): number[] => {
@@ -59,8 +59,9 @@ export const setState = (space: Space, coord: Coordinate, state: State): Space =
 }
 
 const colours = scheme4
-export const drawSpace = (p5: p5, space: Space, config: SpaceConfig) => {
+export const drawSpace = (p5: p5, space: Space, config: SpaceConfig, frame: number) => {
     p5.background(colours[0])
+    if (frame < 0) { return } 
     space.forEach((layer, layerNum) => {
         p5.push()
         p5.translate(0, 0, config.unit)
