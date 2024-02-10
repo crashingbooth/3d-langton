@@ -58,26 +58,26 @@ const makeNoise = (inputValue: number, soundPlayer: SoundPlayer, name: string) =
 
 const articulateState = (system: System, ant: Ant) => {
     const state = getState(system.space, ant.coord) 
-    makeNoise(state, ant.statePlayer, "statePlayer")
+    makeNoise(state, ant.antSoundPlayers.statePlayer, "statePlayer")
 }
 
 // todo: spearate facing dir, and top dir
 const articulateDir = (system: System, ant: Ant) => {
-    makeNoise(ant.orientation.facingDir, ant.facingDirPlayer, "dirPlayer")
+    makeNoise(ant.orientation.facingDir, ant.antSoundPlayers.facingDirPlayer, "dirPlayer")
 }
 
-// todo: add last change to metadata
-// const articulateChange = (system: System, ant: Ant) => {
-//     makeNoise(ant.lastChange, system.changePlayer, "changePlayer")
-// }
+export interface AntSoundPlayers {
+    statePlayer?: SoundPlayer,
+    facingDirPlayer?: SoundPlayer
+}
 
 export const articulate = (system: System) => {
     for (let ant of system.ants) {
-        if (ant.statePlayer) {      
+        if (ant.antSoundPlayers.statePlayer) {      
             articulateState(system, ant)
         }
 
-        if (ant.facingDirPlayer) {
+        if (ant.antSoundPlayers.facingDirPlayer) {
             articulateDir(system, ant)
         }
 

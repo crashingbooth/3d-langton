@@ -1,8 +1,9 @@
 import * as p5 from 'p5';
 import { articulate, bpmToFrameRate, webMidiInit } from './sound';
 import { autorotation, mouseRotation, offsetAxes, keyRotation } from './space';
-import { applyRule, System, tempDefaultSystem } from './system';
+import { applyRule, System } from './system';
 import { drawSpace } from './drawing';
+import { preset1, preset2 } from './preset';
 
 let system: System
 let frame = 0 // -700
@@ -14,7 +15,7 @@ let rotZ = 80
 export const sketch = (p: p5) => {
     p.setup = () => {
         p.createCanvas(16 * screenUnit, 9 * screenUnit, p.WEBGL);
-        system = tempDefaultSystem
+        system = preset2
         webMidiInit()
     }
 
