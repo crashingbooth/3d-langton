@@ -2,7 +2,7 @@ import { Space, SpaceConfig, getState } from './space';
 import { System } from './system';
 import { ColorScheme } from './color';
 
-export const drawSpace = (p5: p5, system: System, frame: number) => {
+export const drawSpace = (p5: p5, system: System, frame: number, useSphere: boolean = false) => {
     let space = system.space
     let config = system.spaceConfig
     let colours = system.colorScheme
@@ -18,14 +18,21 @@ export const drawSpace = (p5: p5, system: System, frame: number) => {
                 p5.push()
                 p5.translate(config.unit * colNum, 0, 0)
                 const state = getState(space, { x: colNum, y: rowNum, z: layerNum })
-                p5.stroke(colours[0] )
-                p5.strokeWeight(4)
-                // p5.noStroke()
+                if (useSphere) {
+                    p5.noStroke()
+                } else {
+                    // p5.noStroke
+                    p5.strokeWeight(0)
+                    p5.stroke(colours[0] )
+                }
 
                 if (state !== 0) {
                     p5.fill(colours[state % colours.length])
-                    p5.box(config.unit * 1 )
-                    //  p5.sphere(config.unit/2)
+                    if (useSphere) {
+                        p5.sphere(config.unit/2)
+                    } else {
+                        p5.box(config.unit * 0.75)
+                    }
                 }
                 p5.pop()
             })

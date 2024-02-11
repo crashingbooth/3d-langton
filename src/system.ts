@@ -100,7 +100,7 @@ export const applyRule = (system: System): System => {
 //     space: makeEmptySpace(defaultConfig),
 //     spaceConfig: defaultConfig,
 //     ants: [makeCentralAnt(defaultConfig)],
-//     rule: [ DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.None   ]
+//     rule: [ DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.LateralReverse, DirectionalChange.None   ]
 // }
 
 // chaotic but potentially interesting, loops around itself

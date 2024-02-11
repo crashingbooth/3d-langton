@@ -42,7 +42,7 @@ const makePairAnts = (config: SpaceConfig,
     offsets: Coordinate = coord(0, 0, 0),): Ant[] => {
 
     const ant1: Ant = {
-        coord: { x: Math.floor(2 * config.numX / 4) + offsets.x, y: Math.floor(2 * config.numY / 4) + offsets.y, z: Math.floor(2 * config.numZ / 4) + offsets.z },
+        coord: { x: Math.floor(2 * config.numX / 4) + offsets.x, y: Math.floor(2 * config.numY / 4) + offsets.y, z: Math.floor(2 * config.numZ / 4) + offsets.z + 2},
         orientation: { topDir: AbsoluteDirection.Up, facingDir: AbsoluteDirection.Front },
         antSoundPlayers: {
             statePlayer: sp3(1),
@@ -52,7 +52,7 @@ const makePairAnts = (config: SpaceConfig,
 
     const ant2: Ant = {
         coord: { x: Math.floor(2 * config.numX / 4) + offsets.x, y: Math.floor(2 * config.numY / 4) + offsets.y, z: Math.floor(3 * config.numZ / 4) + offsets.z },
-        orientation: { topDir: AbsoluteDirection.Up, facingDir: AbsoluteDirection.Right },
+        orientation: { topDir: AbsoluteDirection.Front, facingDir: AbsoluteDirection.Right },
         antSoundPlayers: {
             statePlayer: sp3(3),
             facingDirPlayer: sp2(4)
@@ -163,7 +163,7 @@ const makeCentralAnt = (config: SpaceConfig): Ant[] => {
 //     space: makeEmptySpace(defaultConfig),
 //     spaceConfig: defaultConfig,
 //     ants: makePairAnts(defaultConfig),
-//     rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.None, DirectionalChange.PitchDown, DirectionalChange.TurnLeft ]
+//     rule: [ DirectionalChange.LateralReverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.None, DirectionalChange.PitchDown, DirectionalChange.TurnLeft ]
 // }
 
 
@@ -172,7 +172,7 @@ const makeCentralAnt = (config: SpaceConfig): Ant[] => {
 //     space: makeEmptySpace(defaultConfig),
 //     spaceConfig: defaultConfig,
 //     ants: makePairAnts(defaultConfig),
-//     rule: [DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnRight],
+//     rule: [DirectionalChange.LateralReverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.LateralReverse, DirectionalChange.PitchDown, DirectionalChange.TurnRight],
 //     colorScheme: scheme4
 // }
 
@@ -185,8 +185,9 @@ const ruleFactory = (inputString: string): Rule => {
         case "L":{ return DirectionalChange.TurnLeft }
         case "D":{ return DirectionalChange.PitchDown }
         case "U":{ return DirectionalChange.PitchUp }
-        case "B":{ return DirectionalChange.Reverse }
+        case "B":{ return DirectionalChange.LateralReverse }
         case "N":{ return DirectionalChange.None }
+        case "F":{ return DirectionalChange.PitchReverse}
         }
     }
     return arr.map(char => lookup(char))
@@ -217,8 +218,8 @@ export const preset1 = presetBuilder(
 export const preset2 = presetBuilder(
     defaultConfig,
     scheme3,
-    [0,3,7,10,14,19],
-    "BDLBDL"
+    [0,3,7,10,12,14,17,19,22],
+    "LLRR"//"FLBRFLBU"//"LFDR"
 )
 
 
@@ -227,5 +228,5 @@ export const preset2 = presetBuilder(
 //     space: makeEmptySpace(defaultConfig),
 //     spaceConfig: defaultConfig,
 //     ants: makePairAnts(defaultConfig),
-//     rule: [ DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.Reverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft ]
+//     rule: [ DirectionalChange.LateralReverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft, DirectionalChange.LateralReverse, DirectionalChange.PitchDown, DirectionalChange.TurnLeft ]
 // }

@@ -23,12 +23,15 @@ export const sketch = (p: p5) => {
         frame++
         console.log(`frame:${frame}`)
         mouseRotation(p)
+        let dirX = (p.mouseX / p.width - 0.5) * 2;
+  let dirY = (p.mouseY / p.height - 0.5) * 2;
+  p.directionalLight(255, 255,255, -dirX, -dirY, -1)
+  p.directionalLight(255, 255,255, dirX, dirY, 1)
         autorotation(p, frame, 2)
         offsetAxes(p, system.spaceConfig)
-        p.frameRate(bpmToFrameRate(220))
+        p.frameRate(bpmToFrameRate(300))
 
-
-        drawSpace(p, system, frame)
+        drawSpace(p, system, frame, false)
         if (frame < 0) { return }
         if (frame % 3 === 0) {
             system = applyRule(system)
