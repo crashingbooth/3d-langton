@@ -194,6 +194,12 @@ const ruleFactory = (inputString: string): Rule => {
     return arr.map(char => lookup(char))
 }
 
+const fourwayLighting: Coordinate[] = [
+    coord(0,-1,-1),
+    coord(1,0,-1),
+    coord(-1,-1,0),
+    coord(1,0,1)
+]
 
 export const presetBuilder = (spaceConfig: SpaceConfig,
     colorScheme: ColorScheme,
@@ -213,7 +219,8 @@ export const presetBuilder = (spaceConfig: SpaceConfig,
             framerate: bpmToFrameRate(bpm),
             shape: shape,
             fillRatio: 0.8,
-            strokeWeight: strokeWeight
+            strokeWeight: strokeWeight, 
+            directionalLights: fourwayLighting
         }
     }
 }

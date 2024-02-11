@@ -1,8 +1,7 @@
 import * as p5 from 'p5';
 import { articulate, bpmToFrameRate, webMidiInit } from './sound';
-import { autorotation, mouseRotation, offsetAxes, keyRotation } from './space';
 import { applyRule, System } from './system';
-import { drawSpace } from './drawing';
+import { drawSpace, predraw } from './drawing';
 import { preset1, preset2 } from './preset';
 
 let system: System
@@ -22,15 +21,8 @@ export const sketch = (p: p5) => {
     p.draw = () => {
         frame++
         console.log(`frame:${frame}`)
-        mouseRotation(p)
-        let dirX = (p.mouseX / p.width - 0.5) * 2;
-     let dirY = (p.mouseY / p.height - 0.5) * 2;
-    p.directionalLight(255, 255,255, -dirX, -dirY, -1)
-    p.directionalLight(255, 255,255, dirX, dirY, 1)
-        autorotation(p, frame, 2)
-        offsetAxes(p, system.spaceConfig)
-        p.frameRate(bpmToFrameRate(300))
-
+        
+        predraw(p, system, frame)
         drawSpace(p, system, frame)
         if (frame < 0) { return }
         if (frame % 3 === 0) {
