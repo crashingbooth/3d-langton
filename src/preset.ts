@@ -1,6 +1,7 @@
 import { AbsoluteDirection, Ant, DirectionalChange } from './ant'
 import { ColorScheme, scheme3, scheme4 } from './color'
-import { AntSoundPlayers, sp2, sp3, sp4 } from './sound'
+import { Shape } from './drawing'
+import { AntSoundPlayers, bpmToFrameRate, sp2, sp3, sp4 } from './sound'
 import { Coordinate, SpaceConfig, coord, defaultConfig, makeEmptySpace } from './space'
 import { System, Rule } from './system'
 
@@ -196,28 +197,40 @@ const ruleFactory = (inputString: string): Rule => {
 
 export const presetBuilder = (spaceConfig: SpaceConfig,
     colorScheme: ColorScheme,
+    bpm: number,
     scale: number[],
-    ruleString: string): System => {
+    ruleString: string,
+    strokeWeight: number = 1, 
+    shape: Shape = Shape.box): System => {
 
     return {
         space: makeEmptySpace(spaceConfig),
         spaceConfig: spaceConfig,
         ants: makePairAnts(spaceConfig, antSoundPlayerFactory(scale)),
         rule: ruleFactory(ruleString),
-        colorScheme: colorScheme
+        drawConfig: {
+            colorScheme: colorScheme,
+            framerate: bpmToFrameRate(bpm),
+            shape: shape,
+            fillRatio: 0.8,
+            strokeWeight: strokeWeight
+        }
     }
 }
 
 export const preset1 = presetBuilder(
     defaultConfig,
     scheme4,
+    320,
     [0,3,7,10,14,19],
-    "BDLBDR"
+    "BDLBDR",
+    1
 ) 
 
 export const preset2 = presetBuilder(
     defaultConfig,
     scheme3,
+    320,
     [0,3,7,10,12,14,17,19,22],
     "LLRR"//"FLBRFLBU"//"LFDR"
 )

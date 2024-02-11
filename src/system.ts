@@ -1,8 +1,8 @@
 import { defaultConfig, getState, makeEmptySpace, setState, Space, SpaceConfig, Coordinate } from "./space";
-import { AbsoluteDirection, Ant, DirectionalChange, moveAnt, turnAnt } from "./ant";
+import { Ant, DirectionalChange, moveAnt, turnAnt } from "./ant";
 import { normalize } from "./utilities";
-import { sp1, sp2, sp3 ,sp4} from "./sound";
 import { ColorScheme, scheme4 } from "./color";
+import { DrawConfig } from "./drawing";
 
 export type Rule = DirectionalChange[]
 
@@ -12,7 +12,7 @@ export interface System {
     ants: Ant[],
     rule: Rule,
     turnMetadata?: TurnMetadata, 
-    colorScheme: ColorScheme
+    drawConfig: DrawConfig
 }
 
 export interface TurnMetadata {
