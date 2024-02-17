@@ -9,6 +9,7 @@ export interface DrawConfig {
     strokeWeight: number
     fillRatio: number
     directionalLights: Coordinate[]
+    screenSizeMultiplier: number
 }
 
 export enum Shape {
@@ -71,8 +72,8 @@ const autorotation = (p: p5, frame: number, factor: number) => {
 }
 
 const mouseRotation = (p: p5) => {
-    p.rotateX(p.radians(p.mouseY * 0.3))
-    p.rotateZ(p.radians(p.mouseX * 0.3))
+    p.rotateX(p.radians(p.mouseY * -0.4))
+    p.rotateZ(p.radians(p.mouseX * -0.4))
 }
 
 const keyRotation = (p: p5, rotX: number, rotY: number, rotZ: number) => {

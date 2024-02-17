@@ -34,33 +34,47 @@ const antSoundPlayerFactory = (scale: number[], root: number = 48): AntSoundPlay
         {
             statePlayer: { ...statePlayer, channel: 3, rootNote: root + 12 },
             facingDirPlayer: { ...dirPlayer, channel: 4 }
-        }
+        }, 
+        {
+            statePlayer: { ...statePlayer, channel: 5, rootNote: root + 24 },
+            facingDirPlayer: { ...dirPlayer, channel: 6 }
+        }, 
+
     ]
 }
 
 const makePairAnts = (config: SpaceConfig,
     antSoundPlayers: AntSoundPlayers[],
-    offsets: Coordinate = coord(0, 0, 0),): Ant[] => {
+    offsets: Coordinate = coord(0, 0, 0)): Ant[] => {
 
     const ant1: Ant = {
         coord: { x: Math.floor(2 * config.numX / 4) + offsets.x, y: Math.floor(2 * config.numY / 4) + offsets.y, z: Math.floor(2 * config.numZ / 4) + offsets.z + 2},
         orientation: { topDir: AbsoluteDirection.Up, facingDir: AbsoluteDirection.Front },
         antSoundPlayers: {
-            statePlayer: sp3(1),
-            facingDirPlayer: sp4(2)
+            statePlayer: antSoundPlayers[0].statePlayer,
+            facingDirPlayer: antSoundPlayers[0].facingDirPlayer
         }
     }
 
     const ant2: Ant = {
-        coord: { x: Math.floor(2 * config.numX / 4) + offsets.x, y: Math.floor(2 * config.numY / 4) + offsets.y, z: Math.floor(3 * config.numZ / 4) + offsets.z },
+        coord: { x: Math.floor(2 * config.numX / 4) + offsets.x - 1, y: Math.floor(2 * config.numY / 4) + offsets.y + 4, z: Math.floor(2 * config.numZ / 4) + offsets.z },
         orientation: { topDir: AbsoluteDirection.Front, facingDir: AbsoluteDirection.Right },
         antSoundPlayers: {
-            statePlayer: sp3(3),
-            facingDirPlayer: sp2(4)
+            statePlayer: antSoundPlayers[1].statePlayer,
+            facingDirPlayer: antSoundPlayers[1].facingDirPlayer
         }
     }
 
-    return [ant1, ant2]
+    const ant3: Ant = {
+        coord: { x: Math.floor(2 * config.numX / 4) + offsets.x - 1, y: Math.floor(2 * config.numY / 4) + offsets.y + 4, z: Math.floor(2 * config.numZ / 4) + offsets.z + 5},
+        orientation: { topDir: AbsoluteDirection.Right, facingDir: AbsoluteDirection.Up },
+        antSoundPlayers: {
+            statePlayer: antSoundPlayers[2].statePlayer,
+            facingDirPlayer: antSoundPlayers[2].facingDirPlayer
+        }
+    }
+
+    return [ant1, ant2, ant3]
 }
 
 const makeCentralAnt = (config: SpaceConfig): Ant[] => {
@@ -207,6 +221,8 @@ export const presetBuilder = (spaceConfig: SpaceConfig,
     scale: number[],
     ruleString: string,
     strokeWeight: number = 1, 
+    screenSizeMultiplier: number = 145,
+    fillRatio: number = 0.6, 
     shape: Shape = Shape.box): System => {
 
     return {
@@ -218,10 +234,20 @@ export const presetBuilder = (spaceConfig: SpaceConfig,
             colorScheme: colorScheme,
             framerate: bpmToFrameRate(bpm),
             shape: shape,
-            fillRatio: 0.8,
-            strokeWeight: strokeWeight, 
-            directionalLights: fourwayLighting
+            fillRatio:fillRatio,
+            strokeWeight: strokeWeight,
+            directionalLights: [], //fourwayLighting,
+            screenSizeMultiplier: screenSizeMultiplier
         }
+    }
+}
+
+const spaceConfigBuilder = (size: number, unit: number): SpaceConfig => {
+    return {
+        numX: size,
+        numY: size,
+        numZ: size,
+        unit: unit
     }
 }
 
@@ -235,11 +261,15 @@ export const preset1 = presetBuilder(
 ) 
 
 export const preset2 = presetBuilder(
-    defaultConfig,
+    spaceConfigBuilder(29, 45),
     scheme3,
-    320,
+    155,
     [0,3,7,10,12,14,17,19,22],
-    "LLRR"//"FLBRFLBU"//"LFDR"
+    "LLRRRRLL",//"FLBRFLBU"//"LFDR"
+    0.7,
+    145,
+    0.75,
+    Shape.box
 )
 
 

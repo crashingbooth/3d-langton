@@ -5,16 +5,13 @@ import { drawSpace, predraw } from './drawing';
 import { preset1, preset2 } from './preset';
 
 let system: System
-let frame = 0 // -700
-let screenUnit = 145
-let rotX = 0
-let rotY = 0
-let rotZ = 80
+let frame =  -500
 
 export const sketch = (p: p5) => {
     p.setup = () => {
-        p.createCanvas(16 * screenUnit, 9 * screenUnit, p.WEBGL);
         system = preset2
+        const screenUnit = system.drawConfig.screenSizeMultiplier
+        p.createCanvas(16 * screenUnit, 9 * screenUnit, p.WEBGL);
         webMidiInit()
     }
 
@@ -25,12 +22,11 @@ export const sketch = (p: p5) => {
         predraw(p, system, frame)
         drawSpace(p, system, frame)
         if (frame < 0) { return }
-        if (frame % 3 === 0) {
+        if (frame % 2 === 0) {
             system = applyRule(system)
             articulate(system)
         }
     }
-
 }
 
 export const myp5 = new p5(sketch, document.body);
